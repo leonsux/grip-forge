@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💪 握力训练器</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>💪 握力训练器</h1>
+      <div class="subtitle">DEEP DARK FANTASY ♂ GRIP TRAINER</div>
+    </div>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="train">🏋️ 训练</button>
+      <button class="tab-btn" data-tab="history">📊 记录</button>
+      <button class="tab-btn" data-tab="settings">⚙️ 设置</button>
+    </div>
+
+    <div class="container">
+      <!-- ========== TRAIN TAB ========== -->
+      <div id="tab-train" class="tab-content active">
+        <!-- Timer Ring -->
+        <div class="timer-ring-container">
+          <div class="timer-ring">
+            <svg viewBox="0 0 220 220">
+              <circle class="ring-bg" cx="110" cy="110" r="100" />
+              <circle
+                class="ring-progress"
+                id="ringProgress"
+                cx="110"
+                cy="110"
+                r="100"
+              />
+            </svg>
+            <div class="timer-center">
+              <div class="timer-seconds" id="timerDisplay">60</div>
+              <div class="timer-label" id="timerLabel">准备开始</div>
+              <div class="timer-phase work" id="timerPhase">💪 待命</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Current Group Rep Dots -->
+        <div class="rep-dots-container">
+          <div class="rep-dots-label" id="repDotsLabel">本组进度</div>
+          <div class="rep-dots" id="repDots"></div>
+        </div>
+
+        <!-- Progress Cards -->
+        <div class="progress-info">
+          <div class="progress-card">
+            <div class="value" id="todaySets">0</div>
+            <div class="label">今日已完成组</div>
+          </div>
+          <div class="progress-card">
+            <div class="value" id="currentRepNum">0</div>
+            <div class="label">本组第几次</div>
+          </div>
+          <div class="progress-card">
+            <div class="value" id="todayTotal">0</div>
+            <div class="label">今日总次数</div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="btnReset">🔄 重置本组</button>
+          <button class="btn btn-primary" id="btnStart">▶️ 开始本组</button>
+        </div>
+
+        <!-- Today Overview -->
+        <div class="today-overview" id="todayOverview">
+          <h3>📅 今日总览</h3>
+          <div class="set-progress-bar" id="setProgressBar"></div>
+          <div class="overview-text" id="overviewText"></div>
+        </div>
+      </div>
+
+      <!-- ========== HISTORY TAB ========== -->
+      <div id="tab-history" class="tab-content">
+        <div class="history-header">
+          <h2>训练记录</h2>
+          <div class="streak-badge" id="streakBadge">🔥 0 天连续</div>
+        </div>
+        <div class="calendar-container" id="calendarContainer"></div>
+        <div class="history-list" id="historyList"></div>
+      </div>
+
+      <!-- ========== SETTINGS TAB ========== -->
+      <div id="tab-settings" class="tab-content">
+        <div class="settings-section">
+          <h3>训练参数</h3>
+          <div class="setting-row">
+            <span class="setting-label">每日组数</span>
+            <div class="setting-value">
+              <input
+                type="number"
+                id="settingSets"
+                min="1"
+                max="20"
+                value="5"
+              />
+              <span class="setting-unit">组</span>
+            </div>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">每组次数</span>
+            <div class="setting-value">
+              <input
+                type="number"
+                id="settingReps"
+                min="1"
+                max="20"
+                value="5"
+              />
+              <span class="setting-unit">次</span>
+            </div>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">锻炼时间</span>
+            <div class="setting-value">
+              <input
+                type="number"
+                id="settingWorkTime"
+                min="5"
+                max="300"
+                value="60"
+              />
+              <span class="setting-unit">秒</span>
+            </div>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">休息时间</span>
+            <div class="setting-value">
+              <input
+                type="number"
+                id="settingRestTime"
+                min="3"
+                max="120"
+                value="10"
+              />
+              <span class="setting-unit">秒</span>
+            </div>
+          </div>
+        </div>
+        <div class="settings-section">
+          <h3>数据管理</h3>
+          <div class="setting-row">
+            <span class="setting-label">导出训练数据</span>
+            <button class="btn btn-secondary btn-small" id="btnExport">
+              📤 导出
+            </button>
+          </div>
+          <div class="setting-row">
+            <span class="setting-label">清除所有数据</span>
+            <button class="btn btn-danger btn-small" id="btnClearData">
+              🗑️ 清除
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <canvas class="confetti-overlay" id="confettiCanvas"></canvas>
+
+    <script src="app.js"></script>
+  </body>
+</html>
